@@ -577,20 +577,20 @@ def initialize_forecast_exporter_netcdf(
     ) = _convert_proj4_to_grid_mapping(metadata["projection"])
     # skip writing the grid mapping if a matching name was not found
     if grid_mapping_var_name is not None:
-        var_gm = ncf.createVariable(grid_mapping_var_name, int, dimensions=())
+        var_gm = ncf.createVariable(grid_mapping_var_name, 'i4', dimensions=())
         var_gm.grid_mapping_name = grid_mapping_name
         for i in grid_mapping_params.items():
             var_gm.setncattr(i[0], i[1])
 
     if incremental == "member" or n_ens_gt_one:
-        var_ens_num = ncf.createVariable("ens_number", int, dimensions=("ens_number",))
+        var_ens_num = ncf.createVariable("ens_number", 'i4', dimensions=("ens_number",))
         if incremental != "member":
             var_ens_num[:] = list(range(1, n_ens_members + 1))
         var_ens_num.long_name = "ensemble member"
         var_ens_num.standard_name = "realization"
         var_ens_num.units = ""
 
-    var_time = ncf.createVariable("time", int, dimensions=("time",))
+    var_time = ncf.createVariable("time", 'i4', dimensions=("time",))
     if incremental != "timestep":
         if n_timesteps_is_list:
             var_time[:] = np.array(n_timesteps) * timestep * 60
