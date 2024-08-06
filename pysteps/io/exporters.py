@@ -624,7 +624,7 @@ def initialize_forecast_exporter_netcdf(
     if var_standard_name is not None:
         var_f.standard_name = var_standard_name
     var_f.long_name = var_long_name
-    var_f.coordinates = "y x"
+    var_f.coordinates = "lat lon"
     var_f.units = var_unit
     if grid_mapping_var_name is not None:
         var_f.grid_mapping = grid_mapping_var_name
