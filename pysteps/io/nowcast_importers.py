@@ -180,6 +180,9 @@ def import_netcdf_pysteps(filename, onerror="warn", **kwargs):
             proj_str = _convert_grid_mapping_to_proj4(attr_dict)
             metadata["projection"] = proj_str
 
+        projection = getattr(ds, 'projection', None)
+        metadata["projection"] = projection
+
         # geodata
         metadata["xpixelsize"] = abs(ds.variables["x"][1] - ds.variables["x"][0])
         metadata["ypixelsize"] = abs(ds.variables["y"][1] - ds.variables["y"][0])
