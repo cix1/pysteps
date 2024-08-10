@@ -182,6 +182,7 @@ def import_netcdf_pysteps(filename, onerror="warn", **kwargs):
 
         projection = getattr(ds, 'projection', None)
         metadata["projection"] = projection
+        metadata["cartesian_unit"] = "m"
 
         # geodata
         metadata["xpixelsize"] = abs(ds.variables["x"][1] - ds.variables["x"][0])
