@@ -196,9 +196,12 @@ def plot_map_cartopy(
             ax = plt.subplot(*subplot, projection=crs)
 
     if not isinstance(ax, GeoAxesSubplot):
-        ax = plt.subplot(ax.get_subplotspec(), projection=crs)
-        # cax.clear()
         ax.set_axis_off()
+        ax = plt.subplot(ax.get_subplotspec(), projection=crs)
+        ax.xaxis.set_visible(True)
+        ax.yaxis.set_visible(True)
+        # cax.clear()
+        #ax.set_axis_on()
 
     ax.add_feature(
         cfeature.NaturalEarthFeature(
